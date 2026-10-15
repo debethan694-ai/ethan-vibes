@@ -3,255 +3,171 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Ethan Vibes - Full</title>
+<title>Ethan Vibes</title>
 <link rel="manifest" href="manifest.json">
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif}
-body{background:#0a0a0f;color:#fff;height:100vh;display:flex;overflow:hidden}
-#login{position:fixed;inset:0;background:#0a0a0f;z-index:100;display:flex;align-items:center;justify-content:center;flex-direction:column;padding:30px}
-#login h1{font-size:32px;background:linear-gradient(90deg,#8b5cf6,#ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:10px}
-.login-box{width:100%;max-width:320px;background:#11111a;padding:25px;border-radius:20px;border:1px solid #222;margin-top:20px}
-.login-box input{width:100%;padding:14px;background:#1f1f2e;border:1px solid #333;border-radius:12px;color:#fff;outline:none;margin:15px 0}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui}
+body{background:#0b0e14;color:#fff;height:100vh;display:flex;flex-direction:column;overflow:hidden}
+#login{position:fixed;inset:0;background:#0b0e14;z-index:200;display:flex;align-items:center;justify-content:center;flex-direction:column;padding:25px}
+.login-box{width:100%;max-width:330px;background:#151a26;padding:26px;border-radius:20px;border:1px solid #222}
+.login-box input{width:100%;padding:14px;background:#1e2433;border:1px solid #2a3245;border-radius:12px;color:#fff;outline:none;margin:14px 0}
 .login-box button{width:100%;padding:14px;background:#8b5cf6;border:none;border-radius:12px;color:#fff;font-weight:bold;cursor:pointer}
-.sidebar{width:90px;background:#11111a;border-right:1px solid #222;display:flex;flex-direction:column;align-items:center;padding:20px 0;gap:25px}
-.tab{width:50px;height:50px;border-radius:15px;display:flex;align-items:center;justify-content:center;font-size:22px;cursor:pointer;transition:0.3s;color:#666}
-.tab.active{background:#1f1f2e;color:#8b5cf6}
-.main{flex:1;display:flex;flex-direction:column;background:#0f0f18}
-.header{padding:15px 20px;background:#11111a;border-bottom:1px solid #222;display:flex;align-items:center;justify-content:space-between}
-.header-left{display:flex;align-items:center;gap:10px}
-.avatar{width:36px;height:36px;background:linear-gradient(135deg,#8b5cf6,#ec4899);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold}
+.topbar{padding:12px 18px;background:#151a26;border-bottom:1px solid #1f2636;display:flex;align-items:center;justify-content:space-between}
+.avatar{width:38px;height:38px;background:linear-gradient(135deg,#8b5cf6,#ec4899);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold}
 .panel{display:none;flex:1;overflow:hidden;flex-direction:column}
 .panel.active{display:flex}
-.chat-area{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:12px}
+.chat-area{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;background:#0b0e14}
 .empty{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#555;text-align:center}
-.empty span{font-size:60px;margin-bottom:15px}
-.msg{max-width:75%;padding:10px 14px;border-radius:18px;position:relative;word-break:break-word}
-.msg.user{align-self:flex-end;background:#8b5cf6;border-bottom-right-radius:4px}
-.msg.bot{align-self:flex-start;background:#1f1f2e;border-bottom-left-radius:4px}
-.msg img{max-width:200px;border-radius:12px;margin-top:5px;display:block}
+.msg{max-width:78%;padding:10px 14px;border-radius:18px;word-break:break-word}
+.msg.user{align-self:flex-end;background:#7c3aed;border-bottom-right-radius:4px}
+.msg.bot{align-self:flex-start;background:#1e2433;border-bottom-left-radius:4px}
+.msg img,.msg video{max-width:200px;border-radius:12px;margin-top:6px;display:block}
 .msg-time{font-size:10px;opacity:0.6;margin-top:4px;display:block;text-align:right}
-.input-area{padding:12px;background:#11111a;border-top:1px solid #222;display:flex;align-items:center;gap:8px}
-.input-area input[type=text]{flex:1;padding:12px 16px;background:#1f1f2e;border:1px solid #333;border-radius:25px;color:#fff;outline:none}
-.icon-btn{width:42px;height:42px;border-radius:50%;background:#1f1f2e;border:none;color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center}
-.icon-btn.rec{background:#ef4444;animation:pulse 1s infinite}
-@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
-.status-list,.call-list{padding:20px;overflow-y:auto;flex:1}
-.status-item,.call-item{display:flex;align-items:center;gap:12px;padding:12px;background:#1a1a26;border-radius:12px;margin-bottom:10px;cursor:pointer}
-.status-ring{width:48px;height:48px;border-radius:50%;border:3px solid #8b5cf6;padding:2px}
-.status-ring img,.call-item.avatar{width:100%;height:100%;border-radius:50%}
-.voice-panel{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#1f1f2e;padding:15px 25px;border-radius:25px;display:none;align-items:center;gap:15px;border:1px solid #333;z-index:50}
-.voice-wave{display:flex;gap:3px}
-.wave-bar{width:3px;height:15px;background:#8b5cf6;border-radius:2px;animation:wave 0.5s infinite}
-@keyframes wave{0%,100%{height:10px}50%{height:25px}}
-#fileInput{display:none}
+.input-area{padding:10px;background:#151a26;border-top:1px solid #1f2636;display:flex;align-items:center;gap:8px}
+.input-area input[type=text]{flex:1;padding:11px 16px;background:#1e2433;border:1px solid #2a3245;border-radius:24px;color:#fff;outline:none}
+.icon-btn{width:42px;height:42px;border-radius:50%;background:#1e2433;border:none;color:#fff;font-size:18px;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.bottom-nav{height:62px;background:#151a26;border-top:1px solid #1f2636;display:flex;justify-content:space-around;align-items:center}
+.nav-item{display:flex;flex-direction:column;align-items:center;gap:3px;color:#666;font-size:11px;cursor:pointer;padding:6px 16px;border-radius:14px}
+.nav-item.active{color:#8b5cf6;background:#1e2433}
+.status-list,.call-list{padding:14px;overflow-y:auto;flex:1}
+.status-item,.call-item{display:flex;align-items:center;gap:12px;padding:12px;background:#151a26;border-radius:14px;margin-bottom:10px;cursor:pointer;border:1px solid #1f2636}
+.status-ring{width:52px;height:52px;border-radius:50%;border:3px solid #8b5cf6;padding:2px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.status-ring img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.voice-panel{position:fixed;bottom:70px;left:10px;right:10px;background:#1e2433;padding:14px 18px;border-radius:18px;display:none;align-items:center;gap:12px;border:1px solid #2a3245;z-index:90}
+.wave{display:flex;gap:3px;align-items:center}
+.wave-bar{width:3px;height:12px;background:#8b5cf6;border-radius:2px;animation:wave 0.6s infinite}
+@keyframes wave{0%,100%{height:10px}50%{height:24px}}
+#statusViewer{position:fixed;inset:0;background:#000;z-index:300;display:none;flex-direction:column}
+#statusViewer video,#statusViewer img{flex:1;object-fit:contain;width:100%}
+.call-screen{position:fixed;inset:0;background:#000;z-index:300;display:none;flex-direction:column}
+.call-screen video{flex:1;background:#111;object-fit:cover}
+#fileInput,#statusFile{display:none}
+.progress{height:3px;background:#333;width:100%;display:flex;gap:2px;padding:2px}
+.progress div{flex:1;background:#555;border-radius:2px}
+.progress div.active{background:#fff}
 </style>
 </head>
 <body>
 <div id="login">
-<h1>Ethan Vibes</h1>
-<p style="color:#666">Enter your vibe name</p>
+<h1 style="font-size:34px;background:linear-gradient(90deg,#8b5cf6,#ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent">Ethan Vibes</h1>
+<p style="color:#666;margin:8px 0 18px">WhatsApp-style vibes</p>
 <div class="login-box">
-<input id="userName" placeholder="Your name e.g Ethan" />
+<input id="userName" placeholder="Your name e.g Ethan">
 <button onclick="doLogin()">Enter Vibes ✨</button>
 </div>
 </div>
 
-<div class="sidebar">
-<div class="tab active" onclick="switchTab('chat')" id="t-chat">💬</div>
-<div class="tab" onclick="switchTab('status')" id="t-status">⭕</div>
-<div class="tab" onclick="switchTab('call')" id="t-call">📞</div>
-</div>
-
-<div class="main">
-<div class="header">
-<div class="header-left">
+<div class="topbar">
+<div style="display:flex;align-items:center;gap:10px">
 <div class="avatar" id="myAvatar">E</div>
-<div>
-<div id="headerTitle" style="font-weight:bold">Chats</div>
-<div style="font-size:12px;color:#10b981">● Online</div>
+<div><div id="headerTitle" style="font-weight:700">Chats</div><div style="font-size:11px;color:#10b981">● Online</div></div>
 </div>
-</div>
-<div style="color:#666">⋮</div>
+<div style="color:#666;font-size:20px">⋮</div>
 </div>
 
-<!-- CHAT PANEL -->
 <div class="panel active" id="p-chat">
 <div class="chat-area" id="chatArea">
-<div class="empty" id="emptyChat">
-<span>💜</span>
-<div>No vibes yet</div>
-<small style="color:#444">Start a conversation with Ethan</small>
-</div>
+<div class="empty" id="emptyChat"><span style="font-size:56px">💜</span><div>No vibes yet</div><small style="color:#444">Send pic, video, voice or text</small></div>
 </div>
 <div class="input-area">
 <button class="icon-btn" onclick="document.getElementById('fileInput').click()">📷</button>
 <input type="text" id="msgInput" placeholder="Type a vibe...">
-<button class="icon-btn" id="voiceBtn" onmousedown="startRec()" onmouseup="stopRec()" ontouchstart="startRec()" ontouchend="stopRec()">🎤</button>
+<button class="icon-btn" id="voiceBtn" onpointerdown="startRec(event)" onpointerup="stopRec()" onpointerleave="cancelIfSlide(event)">🎤</button>
 <button class="icon-btn" style="background:#8b5cf6" onclick="sendMsg()">➤</button>
 </div>
 </div>
 
-<!-- STATUS PANEL -->
 <div class="panel" id="p-status">
 <div class="status-list">
-<div class="status-item" onclick="addStatus()">
-<div class="status-ring" style="border-style:dashed;display:flex;align-items:center;justify-content:center;font-size:20px">+</div>
-<div><b>My Status</b><br><small style="color:#666">Tap to add vibe status</small></div>
+<div class="status-item" onclick="document.getElementById('statusFile').click()">
+<div class="status-ring" style="border-style:dashed">+</div>
+<div><b>My Status</b><br><small style="color:#666">Tap to add photo, video or audio</small></div>
 </div>
 <div id="statusContainer"></div>
 </div>
 </div>
 
-<!-- CALL PANEL -->
 <div class="panel" id="p-call">
-<div class="call-list" id="callList">
-<div class="call-item" onclick="makeCall('Ethan')">
-<div class="avatar">E</div>
-<div style="flex:1"><b>Ethan</b><br><small style="color:#666">Today, 7:48 AM - Incoming</small></div>
-<div>📞</div>
+<div class="call-list" id="callList"></div>
+<div style="padding:14px;display:flex;gap:10px">
+<button onclick="startVoiceCall()" style="flex:1;padding:13px;background:#1e2433;border:1px solid #2a3245;border-radius:12px;color:#fff">📞 Voice Call</button>
+<button onclick="startVideoCall()" style="flex:1;padding:13px;background:#8b5cf6;border:none;border-radius:12px;color:#fff">🎥 Video Call</button>
 </div>
 </div>
-<div style="padding:20px">
-<button onclick="makeCall('New Vibe')" style="width:100%;padding:14px;background:#8b5cf6;border:none;border-radius:12px;color:#fff;font-weight:bold">+ New Call</button>
-</div>
-</div>
+
+<div class="bottom-nav">
+<div class="nav-item active" id="n-chat" onclick="switchTab('chat')"><span style="font-size:20px">💬</span>Chats</div>
+<div class="nav-item" id="n-status" onclick="switchTab('status')"><span style="font-size:20px">⭕</span>Status</div>
+<div class="nav-item" id="n-call" onclick="switchTab('call')"><span style="font-size:20px">📞</span>Calls</div>
 </div>
 
 <div class="voice-panel" id="voicePanel">
-<div class="voice-wave"><div class="wave-bar"></div><div class="wave-bar" style="animation-delay:0.1s"></div><div class="wave-bar" style="animation-delay:0.2s"></div><div class="wave-bar" style="animation-delay:0.3s"></div></div>
-<span id="recTime">0:00</span>
-<button onclick="stopRec()" style="background:#ef4444;border:none;color:#fff;padding:6px 12px;border-radius:12px">Stop</button>
+<button onclick="cancelRec()" style="background:none;border:none;color:#ef4444;font-size:20px">✕</button>
+<div class="wave"><div class="wave-bar"></div><div class="wave-bar" style="animation-delay:.1s"></div><div class="wave-bar" style="animation-delay:.2s"></div><div class="wave-bar" style="animation-delay:.3s"></div></div>
+<span id="recTime" style="flex:1">0:00 - slide to cancel, release to send</span>
+<button onclick="stopRec()" style="background:#8b5cf6;border:none;color:#fff;padding:8px 14px;border-radius:20px">Send</button>
 </div>
 
-<input type="file" id="fileInput" accept="image/*" onchange="sendImage(event)">
+<div id="statusViewer" onclick="closeStatus()">
+<div class="progress" id="prog"></div>
+<div style="padding:12px;display:flex;align-items:center;gap:10px"><div class="avatar" id="viewerAv">E</div><div id="viewerName"></div><div style="margin-left:auto" onclick="closeStatus()">✕</div></div>
+<div id="viewerContent" style="flex:1;display:flex;align-items:center;justify-content:center"></div>
+</div>
+
+<div class="call-screen" id="callScreen">
+<video id="localVideo" autoplay muted playsinline></video>
+<video id="remoteVideo" autoplay playsinline style="position:absolute;top:20px;right:20px;width:110px;height:150px;border-radius:12px;border:2px solid #8b5cf6;background:#222"></video>
+<div style="position:absolute;bottom:30px;left:0;right:0;display:flex;justify-content:center;gap:18px">
+<button class="icon-btn" style="background:#ef4444;width:56px;height:56px" onclick="endCall()">✕</button>
+<button class="icon-btn" style="background:#1e2433;width:56px;height:56px" onclick="toggleMute()">🎤</button>
+<button class="icon-btn" style="background:#1e2433;width:56px;height:56px" onclick="toggleCam()">🎥</button>
+</div>
+<div style="position:absolute;top:20px;left:20px" id="callInfo">Calling...</div>
+</div>
+
+<input type="file" id="fileInput" accept="image/*,video/*" onchange="sendMedia(event)">
+<input type="file" id="statusFile" accept="image/*,video/*,audio/*" onchange="addStatusMedia(event)">
 
 <script>
-let user = localStorage.getItem('ethan_user')||'';
-let messages = JSON.parse(localStorage.getItem('ethan_msgs')||'[]');
-let statuses = JSON.parse(localStorage.getItem('ethan_status')||'[]');
-let recorder, chunks=[], recTimer, recSec=0;
+let user=localStorage.getItem('ethan_user')||'';
+let messages=JSON.parse(localStorage.getItem('ethan_msgs')||'[]');
+let statuses=JSON.parse(localStorage.getItem('ethan_status_v2')||'[]');
+let recorder,chunks=[],recTimer,recSec=0,startX=0,isCancel=false,localStream;
+if(user){document.getElementById('login').style.display='none';document.getElementById('myAvatar').textContent=user[0].toUpperCase();loadMsgs();loadStatus();loadCalls();}
 
-if(user){document.getElementById('login').style.display='none';document.getElementById('myAvatar').textContent=user[0].toUpperCase();loadMsgs();}
+function doLogin(){let n=document.getElementById('userName').value.trim();if(!n)return alert('Enter name');user=n;localStorage.setItem('ethan_user',n);document.getElementById('login').style.display='none';document.getElementById('myAvatar').textContent=n[0].toUpperCase();loadMsgs();loadStatus();loadCalls();}
 
-function doLogin(){
- let n=document.getElementById('userName').value.trim();
- if(!n)return alert('Enter name');
- user=n;localStorage.setItem('ethan_user',n);
- document.getElementById('login').style.display='none';
- document.getElementById('myAvatar').textContent=n[0].toUpperCase();
- loadMsgs();
-}
+function switchTab(t){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.nav-item').forEach(b=>b.classList.remove('active'));document.getElementById('p-'+t).classList.add('active');document.getElementById('n-'+t).classList.add('active');document.getElementById('headerTitle').textContent=t==='chat'?'Chats':t==='status'?'Status':'Calls';}
 
-function switchTab(t){
- document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
- document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
- document.getElementById('p-'+t).classList.add('active');
- document.getElementById('t-'+t).classList.add('active');
- document.getElementById('headerTitle').textContent=t==='chat'?'Chats':t==='status'?'Status':'Calls';
-}
+function loadMsgs(){let area=document.getElementById('chatArea');if(messages.length===0)return;document.getElementById('emptyChat').style.display='none';area.innerHTML='';messages.forEach(m=>renderMsg(m));}
+function renderMsg(m){let area=document.getElementById('chatArea');let d=document.createElement('div');d.className='msg '+m.type;let content=m.text||'';if(m.mediaType==='image')content+=`<img src="${m.media}">`;if(m.mediaType==='video')content+=`<video src="${m.media}" controls></video>`;if(m.mediaType==='audio')content+=`<audio controls src="${m.media}" style="width:180px"></audio>`;content+=`<span class="msg-time">${m.time} ✓✓</span>`;d.innerHTML=content;area.appendChild(d);area.scrollTop=area.scrollHeight;}
+function sendMsg(){let input=document.getElementById('msgInput');let txt=input.value.trim();if(!txt)return;let time=new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});let m={text:txt,type:'user',time};messages.push(m);localStorage.setItem('ethan_msgs',JSON.stringify(messages));document.getElementById('emptyChat').style.display='none';renderMsg(m);input.value='';}
 
-function loadMsgs(){
- let area=document.getElementById('chatArea');
- if(messages.length===0)return;
- document.getElementById('emptyChat').style.display='none';
- area.innerHTML='';
- messages.forEach(m=>renderMsg(m));
-}
+function sendMedia(e){let file=e.target.files[0];if(!file)return;let reader=new FileReader();reader.onload=function(ev){let time=new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});let type=file.type.startsWith('video')?'video':'image';let m={text:'',media:ev.target.result,mediaType:type,type:'user',time};messages.push(m);localStorage.setItem('ethan_msgs',JSON.stringify(messages));document.getElementById('emptyChat').style.display='none';renderMsg(m);};reader.readAsDataURL(file);}
 
-function renderMsg(m){
- let area=document.getElementById('chatArea');
- let d=document.createElement('div');
- d.className='msg '+m.type;
- let content=m.text;
- if(m.img)content+=`<img src="${m.img}">`;
- content+=`<span class="msg-time">${m.time} ✓✓</span>`;
- d.innerHTML=content;
- area.appendChild(d);
- area.scrollTop=area.scrollHeight;
-}
+async function startRec(e){isCancel=false;startX=e.clientX||0;try{let stream=await navigator.mediaDevices.getUserMedia({audio:true});recorder=new MediaRecorder(stream);chunks=[];recSec=0;recorder.ondataavailable=ev=>chunks.push(ev.data);recorder.onstop=()=>{if(isCancel){stream.getTracks().forEach(t=>t.stop());return;}let blob=new Blob(chunks,{type:'audio/webm'});let reader=new FileReader();reader.onload=()=>{let time=new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});let m={text:'',media:reader.result,mediaType:'audio',type:'user',time};messages.push(m);localStorage.setItem('ethan_msgs',JSON.stringify(messages));document.getElementById('emptyChat').style.display='none';renderMsg(m);};reader.readAsDataURL(blob);stream.getTracks().forEach(t=>t.stop());};recorder.start();document.getElementById('voicePanel').style.display='flex';recTimer=setInterval(()=>{recSec++;document.getElementById('recTime').textContent=recSec+'s - release to send, slide left to cancel';},1000);}catch(err){alert('Mic permission needed');}}
+function cancelIfSlide(e){let x=e.clientX||0;if(startX-x>80){cancelRec();}}
+function stopRec(){if(recorder&&recorder.state==='recording'){recorder.stop();clearInterval(recTimer);document.getElementById('voicePanel').style.display='none';}}
+function cancelRec(){isCancel=true;if(recorder&&recorder.state==='recording'){recorder.stop();}clearInterval(recTimer);document.getElementById('voicePanel').style.display='none';document.getElementById('recTime').textContent='0:00 - slide to cancel, release to send';}
 
-function sendMsg(){
- let input=document.getElementById('msgInput');
- let txt=input.value.trim();
- if(!txt)return;
- let time=new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
- let m={text:txt,type:'user',time};
- messages.push(m);localStorage.setItem('ethan_msgs',JSON.stringify(messages));
- document.getElementById('emptyChat').style.display='none';
- renderMsg(m);
- input.value='';
- setTimeout(()=>{
-  let bot={text:"Love that vibe! 💜 Keep vibing, "+user+"!",type:'bot',time};
-  messages.push(bot);localStorage.setItem('ethan_msgs',JSON.stringify(messages));
-  renderMsg(bot);
- },800);
-}
+function addStatusMedia(e){let file=e.target.files[0];if(!file)return;let reader=new FileReader();reader.onload=function(ev){let s={media:ev.target.result,mediaType:file.type.startsWith('video')?'video':file.type.startsWith('audio')?'audio':'image',text:file.name,time:Date.now(),user};statuses.push(s);localStorage.setItem('ethan_status_v2',JSON.stringify(statuses));loadStatus();};reader.readAsDataURL(file);}
+function loadStatus(){let c=document.getElementById('statusContainer');c.innerHTML='';statuses.slice().reverse().forEach((s,i)=>{let thumb=s.mediaType==='image'?`<img src="${s.media}">`:s.mediaType==='video'?'🎥':'🎤';c.innerHTML+=`<div class="status-item" onclick="openStatus(${statuses.length-1-i})"><div class="status-ring">${thumb.length<5?thumb:`<div style="width:100%;height:100%;border-radius:50%;overflow:hidden">${thumb}</div>`}</div><div><b>${s.user}</b><br><small style="color:#666">${new Date(s.time).toLocaleTimeString()} - ${s.mediaType}</small></div></div>`;});}
+let curStatus=0;
+function openStatus(idx){curStatus=idx;let s=statuses[idx];document.getElementById('statusViewer').style.display='flex';document.getElementById('viewerName').textContent=s.user+' - '+s.mediaType;document.getElementById('viewerAv').textContent=s.user[0].toUpperCase();let content=document.getElementById('viewerContent');if(s.mediaType==='image')content.innerHTML=`<img src="${s.media}" style="width:100%;height:100%;object-fit:contain">`;else if(s.mediaType==='video')content.innerHTML=`<video src="${s.media}" autoplay controls style="width:100%;height:100%"></video>`;else content.innerHTML=`<audio src="${s.media}" controls autoplay style="width:80%"></audio><div style="margin-top:20px">${s.text}</div>`;document.getElementById('prog').innerHTML='<div class="active"></div>';setTimeout(()=>{if(curStatus<statuses.length-1)openStatus(curStatus+1);},5000);}
+function closeStatus(){document.getElementById('statusViewer').style.display='none';}
 
-function sendImage(e){
- let file=e.target.files[0];
- if(!file)return;
- let reader=new FileReader();
- reader.onload=function(ev){
-  let time=new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
-  let m={text:'📷 Image',img:ev.target.result,type:'user',time};
-  messages.push(m);localStorage.setItem('ethan_msgs',JSON.stringify(messages));
-  document.getElementById('emptyChat').style.display='none';
-  renderMsg(m);
- };
- reader.readAsDataURL(file);
-}
+function loadCalls(){let list=document.getElementById('callList');let calls=JSON.parse(localStorage.getItem('ethan_calls')||'[]');if(calls.length===0){list.innerHTML=`<div class="empty" style="padding:40px"><span>📞</span><div>No calls yet</div></div>`;return;}list.innerHTML='';calls.slice().reverse().forEach(c=>{list.innerHTML+=`<div class="call-item" onclick="${c.type==='video'?'startVideoCall':'startVoiceCall'}()"><div class="avatar">${c.name[0]}</div><div style="flex:1"><b>${c.name}</b><br><small style="color:#666">${c.time} - ${c.type}</small></div><div>${c.type==='video'?'🎥':'📞'}</div></div>`;});}
+function saveCall(name,type){let calls=JSON.parse(localStorage.getItem('ethan_calls')||'[]');calls.push({name,type,time:new Date().toLocaleString()});localStorage.setItem('ethan_calls',JSON.stringify(calls));loadCalls();}
 
-async function startRec(){
- try{
-  let stream=await navigator.mediaDevices.getUserMedia({audio:true});
-  recorder=new MediaRecorder(stream);chunks=[];recSec=0;
-  recorder.ondataavailable=e=>chunks.push(e.data);
-  recorder.onstop=()=>{
-   let blob=new Blob(chunks,{type:'audio/webm'});
-   let url=URL.createObjectURL(blob);
-   let time=new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
-   let area=document.getElementById('chatArea');
-   let d=document.createElement('div');d.className='msg user';
-   d.innerHTML=`<audio controls src="${url}" style="width:180px"></audio><span class="msg-time">${time} 🎤</span>`;
-   area.appendChild(d);area.scrollTop=area.scrollHeight;
-   document.getElementById('voicePanel').style.display='none';
-   stream.getTracks().forEach(t=>t.stop());
-  };
-  recorder.start();
-  document.getElementById('voicePanel').style.display='flex';
-  document.getElementById('voiceBtn').classList.add('rec');
-  recTimer=setInterval(()=>{recSec++;document.getElementById('recTime').textContent='0:'+String(recSec).padStart(2,'0');},1000);
- }catch(err){alert('Mic permission needed');}
-}
+async function startVoiceCall(){document.getElementById('callScreen').style.display='flex';document.getElementById('callInfo').textContent='Voice Call - '+user;try{localStream=await navigator.mediaDevices.getUserMedia({audio:true});document.getElementById('localVideo').srcObject=localStream;saveCall('Ethan','voice');}catch{}}
 
-function stopRec(){
- if(recorder&&recorder.state==='recording'){recorder.stop();clearInterval(recTimer);document.getElementById('voiceBtn').classList.remove('rec');}
-}
+async function startVideoCall(){document.getElementById('callScreen').style.display='flex';document.getElementById('callInfo').textContent='Video Call - '+user;try{localStream=await navigator.mediaDevices.getUserMedia({video:true,audio:true});document.getElementById('localVideo').srcObject=localStream;saveCall('Ethan','video');}catch(err){alert('Camera/mic permission needed');}}
 
-function addStatus(){
- let txt=prompt('What is your status vibe?');
- if(!txt)return;
- let s={text:txt,time:Date.now(),user};
- statuses.push(s);localStorage.setItem('ethan_status',JSON.stringify(statuses));
- loadStatus();
-}
-
-function loadStatus(){
- let c=document.getElementById('statusContainer');c.innerHTML='';
- statuses.slice().reverse().forEach(s=>{
-  c.innerHTML+=`<div class="status-item"><div class="status-ring"><div class="avatar">${s.user[0].toUpperCase()}</div></div><div><b>${s.user}</b><br><small>${s.text} - ${new Date(s.time).toLocaleTimeString()}</small></div></div>`;
- });
-}
-loadStatus();
-
-function makeCall(name){
- alert('📞 Calling '+name+'...\n\nVoice call UI would connect here. For full calling you need WebRTC server — this is the panel UI!');
- let list=document.getElementById('callList');
- let time=new Date().toLocaleString();
- list.innerHTML=`<div class="call-item"><div class="avatar">${name[0]}</div><div style="flex:1"><b>${name}</b><br><small style="color:#666">${time} - Outgoing</small></div><div>📞</div></div>`+list.innerHTML;
-}
+function endCall(){document.getElementById('callScreen').style.display='none';if(localStream){localStream.getTracks().forEach(t=>t.stop());}document.getElementById('localVideo').srcObject=null;}
+function toggleMute(){if(!localStream)return;localStream.getAudioTracks().forEach(t=>t.enabled=!t.enabled);}
+function toggleCam(){if(!localStream)return;localStream.getVideoTracks().forEach(t=>t.enabled=!t.enabled);}
 
 document.getElementById('msgInput').addEventListener('keypress',e=>{if(e.key==='Enter')sendMsg();});
 </script>
 </body>
-  </html>
+ </html>
