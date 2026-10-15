@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ethan Vibes</title>
+<style>
+body{background:#0b1014;color:#fff;font-family:sans-serif;margin:0;height:100vh;display:flex;justify-content:center;align-items:center;padding:20px}
+.box{background:#202c33;padding:24px;border-radius:16px;width:100%;max-width:400px}
+input{width:100%;padding:14px;background:#0b1014;border:1px solid #2a3942;border-radius:10px;color:#fff;margin:8px 0;box-sizing:border-box}
+button{width:100%;padding:14px;background:linear-gradient(90deg,#8b5cf6,#ec4899);border:none;border-radius:24px;color:#fff;font-weight:700;margin-top:10px}
+#app{display:none;flex-direction:column;height:100vh;width:100%;max-width:500px;background:#0b1014}
+.chat{padding:14px;border-bottom:1px solid #202c33}
+</style>
+</head>
+<body>
+<div id="s1" class="box">
+<h1>Ethan Vibes 💜</h1>
+<p style="color:#8696a0">Verify to enter</p>
+<input id="phone" value="+256789112128">
+<input id="uname" value="Ethan">
+<button onclick="nextStep()">Next →</button>
+</div>
+<div id="s2" class="box" style="display:none">
+<h1>OTP</h1>
+<p>Enter <b>123456</b></p>
+<input id="otp" placeholder="123456">
+<button onclick="enterApp()">Enter Ethan Vibes</button>
+</div>
+<div id="app">
+<div style="padding:16px;background:#202c33;display:flex;justify-content:space-between"><b>Ethan Vibes</b><span>⚙️</span></div>
+<div id="chats"></div>
+</div>
+<script>
+function nextStep(){
+let p=document.getElementById('phone').value;
+let n=document.getElementById('uname').value;
+if(!p||!n){alert('Enter phone and name');return;}
+localStorage.setItem('ev_phone',p);
+localStorage.setItem('ev_name',n);
+document.getElementById('s1').style.display='none';
+document.getElementById('s2').style.display='block';
+}
+function enterApp(){
+let o=document.getElementById('otp').value;
+if(o.length<3){alert('Enter 123456');return;}
+localStorage.setItem('ev_verified','true');
+openApp();
+}
+function openApp(){
+document.getElementById('s1').style.display='none';
+document.getElementById('s2').style.display='none';
+document.getElementById('app').style.display='flex';
+document.getElementById('chats').innerHTML='<div class=chat><b>Business assistant</b><br>It is OPEN NOW! 🔥</div><div class=chat><b>CINDY</b><br>Missed call</div><div class=chat><b>JUDE</b><br>Apwoyo matek</div>';
+}
+if(localStorage.getItem('ev_verified')){openApp();}
+</script>
+</body>
+</html>
