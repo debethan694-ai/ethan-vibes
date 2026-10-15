@@ -2,197 +2,184 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>WhatsApp - Ethan Vibes</title>
-<link rel="manifest" href="manifest.json">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ethan Vibes WhatsApp</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Roboto,Helvetica,Arial,sans-serif}
+*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif}
 body{background:#0b1014;color:#e9edef;height:100vh;display:flex;flex-direction:column;overflow:hidden}
-.header{background:#0b1014;padding:10px 14px;display:flex;align-items:center;justify-content:space-between}
-.header h1{font-size:24px;font-weight:700;color:#e9edef}
-.header-right{display:flex;gap:22px;font-size:22px}
-.search{margin:4px 14px 10px;background:#1f2c34;border-radius:26px;padding:10px 14px;display:flex;align-items:center;gap:12px;color:#8696a0}
-.search input{flex:1;background:transparent;border:none;outline:none;color:#e9edef;font-size:15px}
-.filters{display:flex;gap:8px;padding:0 14px 10px;overflow-x:auto;white-space:nowrap}
-.chip{padding:7px 12px;background:#1f2c34;border-radius:18px;font-size:13px;color:#8696a0;border:none;cursor:pointer}
+#login{position:fixed;inset:0;background:#0b1014;z-index:999;display:flex;align-items:center;justify-content:center;flex-direction:column;padding:24px}
+.login-box{width:100%;max-width:340px;background:#1f2c34;padding:22px;border-radius:16px}
+.login-box input{width:100%;padding:14px;background:#0b1014;border:1px solid #2a3942;border-radius:10px;color:#fff;outline:none;margin:12px 0}
+.login-box button{width:100%;padding:14px;background:#25d366;border:none;border-radius:24px;color:#0b1014;font-weight:700;cursor:pointer}
+.header{background:#0b1014;padding:12px 14px;display:flex;justify-content:space-between;align-items:center}
+.search{margin:4px 14px 10px;background:#1f2c34;border-radius:26px;padding:10px 14px;display:flex;gap:10px}
+.search input{flex:1;background:transparent;border:none;color:#fff;outline:none}
+.filters{display:flex;gap:8px;padding:0 14px 10px}
+.chip{padding:7px 12px;background:#1f2c34;border-radius:18px;font-size:13px;color:#8696a0;border:none}
 .chip.active{background:#0a332c;color:#53bdeb}
-.chatlist{flex:1;overflow-y:auto;background:#0b1014}
-.chat-row{display:flex;align-items:center;gap:12px;padding:12px 14px;cursor:pointer}
-.chat-row:active{background:#1f2c34}
-.avatar{width:49px;height:49px;border-radius:50%;background:#333;display:flex;align-items:center;justify-content:center;font-weight:600;position:relative;flex-shrink:0;overflow:hidden}
-.avatar img{width:100%;height:100%;object-fit:cover}
-.avatar.has-story{border:3px solid #25d366;padding:2px}
-.badge{position:absolute;bottom:-2px;right:-2px;width:20px;height:20px;background:#25d366;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;color:#0b1014;border:2px solid #0b1014}
-.info{flex:1;min-width:0;border-bottom:1px solid #1f2c34;padding-bottom:12px}
-.info-top{display:flex;justify-content:space-between;gap:8px}
-.name{font-size:17px;color:#e9edef;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.time{font-size:12px;color:#8696a0;flex-shrink:0}
-.time.green{color:#25d366}
-.preview{display:flex;align-items:center;gap:4px;color:#8696a0;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:3px}
-.tick{color:#53bdeb}
-.unread{background:#25d366;color:#0b1014;font-size:12px;padding:2px 6px;border-radius:12px;margin-left:auto}
-.bottom-nav{height:78px;background:#0b1014;border-top:1px solid #1f2c34;display:flex;justify-content:space-around;align-items:center;padding-bottom:6px}
-.nav{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;color:#8696a0;font-size:12px;cursor:pointer}
+.chatlist{flex:1;overflow-y:auto}
+.chat-row{display:flex;gap:12px;padding:12px 14px;border-bottom:1px solid #1f2c3422;cursor:pointer}
+.avatar{width:49px;height:49px;border-radius:50%;background:#1f2c34;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.info{flex:1}
+.name{font-weight:500}
+.preview{color:#8696a0;font-size:13px;margin-top:2px}
+.bottom-nav{height:70px;background:#0b1014;border-top:1px solid #1f2c34;display:flex;justify-content:space-around;align-items:center}
+.nav{color:#8696a0;font-size:11px;display:flex;flex-direction:column;align-items:center;cursor:pointer}
 .nav.active{color:#e9edef}
-.nav-icon{width:36px;height:26px;display:flex;align-items:center;justify-content:center;font-size:22px;position:relative}
-.nav.active.nav-icon{color:#fff}
-.dot{position:absolute;top:0;right:4px;width:10px;height:10px;background:#25d366;border-radius:50%;border:2px solid #0b1014}
-.fab{position:fixed;bottom:90px;right:18px;width:56px;height:56px;background:#25d366;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:26px;color:#0b1014;box-shadow:0 4px 12px rgba(0,0,0,0.4);cursor:pointer;z-index:20}
+.fab{position:fixed;bottom:85px;right:16px;width:56px;height:56px;background:#25d366;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:28px;color:#0b1014}
 .panel{display:none;flex:1;overflow:hidden;flex-direction:column}
 .panel.active{display:flex}
-#login{position:fixed;inset:0;background:#0b1014;z-index:100;display:flex;align-items:center;justify-content:center;flex-direction:column;padding:24px}
-.login-box{width:100%;max-width:340px;background:#1f2c34;padding:22px;border-radius:16px}
-.login-box input{width:100%;padding:14px;background:#0b1014;border:none;border-radius:10px;color:#fff;outline:none;margin:12px 0}
-.login-box button{width:100%;padding:14px;background:#25d366;border:none;border-radius:24px;color:#0b1014;font-weight:700}
-.chat-screen{position:fixed;inset:0;background:#0b1014;z-index:50;display:none;flex-direction:column}
-.chat-header{padding:10px 12px;background:#1f2c34;display:flex;align-items:center;gap:10px}
-.chat-area{flex:1;overflow-y:auto;padding:16px;background:url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png');background-color:#0b1014;display:flex;flex-direction:column;gap:8px}
-.bubble{max-width:78%;padding:7px 9px;border-radius:8px;font-size:14.2px;position:relative;box-shadow:0 1px 0.5px rgba(0,0,0,0.3)}
-.bubble.user{align-self:flex-end;background:#005c4b;color:#e9edef;border-top-right-radius:0}
-.bubble.bot{align-self:flex-start;background:#1f2c34;color:#e9edef;border-top-left-radius:0}
-.bubble img,.bubble video{max-width:220px;border-radius:8px;display:block;margin-top:4px}
-.bubble-time{font-size:11px;color:#8696a0;float:right;margin:4px 0 0 8px}
-.input-bar{padding:6px 10px;background:#1f2c34;display:flex;align-items:center;gap:8px}
-.input-bar input{flex:1;padding:10px 14px;background:#2a3942;border:none;border-radius:22px;color:#fff;outline:none}
-.icon{width:40px;height:40px;border-radius:50%;background:#2a3942;display:flex;align-items:center;justify-content:center;cursor:pointer}
-.call-screen{position:fixed;inset:0;background:#000;z-index:60;display:none;flex-direction:column}
-.call-screen video{flex:1;object-fit:cover;background:#111}
-#statusViewer{position:fixed;inset:0;background:#000;z-index:70;display:none;flex-direction:column}
-.progress{display:flex;gap:4px;padding:6px}
-.progress div{flex:1;height:3px;background:#555;border-radius:2px}
-.progress div.on{background:#fff}
-.unique-bar{display:flex;gap:8px;padding:10px 14px;overflow-x:auto;background:#111b21}
-.unique-chip{padding:8px 12px;background:#1f2c34;border-radius:20px;font-size:12px;white-space:nowrap;cursor:pointer;border:1px solid #2a3942}
+.chat-screen{position:fixed;inset:0;background:#0b1014;z-index:100;display:none;flex-direction:column}
+.chat-area{flex:1;padding:16px;overflow-y:auto;display:flex;flex-direction:column;gap:8px}
+.bubble{max-width:75%;padding:8px 10px;border-radius:8px;font-size:14px}
+.bubble.user{align-self:flex-end;background:#005c4b}
+.bubble.bot{align-self:flex-start;background:#1f2c34}
+.input-bar{padding:8px;background:#1f2c34;display:flex;gap:8px}
+.input-bar input{flex:1;padding:10px 14px;border-radius:20px;border:none;background:#2a3942;color:#fff;outline:none}
+.unique{display:flex;gap:8px;padding:8px 14px;overflow-x:auto}
+.unique div{padding:6px 10px;background:#1f2c34;border-radius:14px;font-size:11px;white-space:nowrap}
 </style>
 </head>
 <body>
+
 <div id="login">
-<h1 style="color:#25d366;font-size:36px;margin-bottom:6px">Ethan Vibes</h1>
-<p style="color:#8696a0;margin-bottom:18px">WhatsApp-style + Unique</p>
+<h1 style="color:#25d366;font-size:36px">Ethan Vibes</h1>
+<p style="color:#8696a0;margin:6px 0 18px">WhatsApp-style + Unique</p>
 <div class="login-box">
-<input id="userName" placeholder="Your name">
-<button onclick="doLogin()">Continue →</button>
+<input id="userName" placeholder="Your name" value="Ethan">
+<button id="loginBtn">Continue →</button>
 </div>
 </div>
 
-<div class="header">
-<h1>WhatsApp</h1>
-<div class="header-right"><span onclick="document.getElementById('statusFile').click()">📷</span><span>⋮</span></div>
-</div>
+<div class="header"><h1>WhatsApp</h1><div>📷 ⋮</div></div>
+<div class="search">🔍<input placeholder="Ask Meta AI or Search"></div>
+<div class="filters"><button class="chip active">All</button><button class="chip">Unread 1</button><button class="chip">Favorites</button><button class="chip">Groups</button></div>
+<div class="unique"><div onclick="alert('🎨 Vibe Theme ON')">🎨 Vibe Theme</div><div>👻 Ghost View</div><div onclick="document.getElementById('statusFile').click()">🎵 Music Status</div><div>✨ AI Summarize</div><div>💨 Vanish Mode</div></div>
 
-<div class="search"><span>🔍</span><input placeholder="Ask Meta AI or Search" id="searchInput" oninput="filterChats()"></div>
-
-<div class="filters">
-<button class="chip active" onclick="filter('all',this)">All</button>
-<button class="chip" onclick="filter('unread',this)">Unread 1</button>
-<button class="chip" onclick="filter('fav',this)">Favorites</button>
-<button class="chip" onclick="filter('groups',this)">Groups</button>
-<button class="chip">+</button>
-</div>
-
-<div class="unique-bar">
-<div class="unique-chip" onclick="toggleTheme()">🎨 Vibe Theme</div>
-<div class="unique-chip" onclick="alert('👻 Ghost Mode: View status without them knowing ON')">👻 Ghost View</div>
-<div class="unique-chip" onclick="document.getElementById('statusFile').click()">🎵 Music Status</div>
-<div class="unique-chip" onclick="summarize()">✨ AI Summarize</div>
-<div class="unique-chip" onclick="alert('💨 Vanish Mode ON - messages disappear after seen')">💨 Vanish Mode</div>
-</div>
-
-<div class="panel active" id="p-chats">
-<div class="chatlist" id="chatList"></div>
-</div>
-
-<div class="panel" id="p-updates">
-<div class="chatlist" id="statusList" style="padding:10px">
-<div style="display:flex;align-items:center;gap:12px;padding:12px;background:#111b21;border-radius:12px;margin-bottom:10px;cursor:pointer" onclick="document.getElementById('statusFile').click()"><div class="avatar" style="border:2px dashed #25d366">+</div><div><b>My Status</b><br><small style="color:#8696a0">Tap to add photo, video, audio, music</small></div></div>
-<div id="statusContainer"></div>
-</div>
-</div>
-
-<div class="panel" id="p-communities">
-<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:30px;text-align:center;color:#8696a0">
-<div style="font-size:60px">👥</div><h3 style="color:#e9edef;margin:12px 0">Vibe Communities - UNIQUE</h3><p>Create vibe groups: Music, Gaming, Love, Study. WhatsApp doesn't have this design!</p><button onclick="createCommunity()" style="margin-top:16px;padding:12px 20px;background:#25d366;border:none;border-radius:22px;font-weight:700">+ New Vibe Community</button>
-<div id="commList" style="width:100%;margin-top:20px"></div>
-</div>
-</div>
-
-<div class="panel" id="p-calls">
-<div class="chatlist" id="callList"></div>
-<div style="padding:12px"><button onclick="startVideoCall()" style="width:100%;padding:14px;background:#25d366;border:none;border-radius:24px;font-weight:700">+ New Video/Voice Call</button></div>
-</div>
+<div class="panel active" id="p-chats"><div class="chatlist" id="chatList"></div></div>
+<div class="panel" id="p-updates"><div class="chatlist" style="padding:12px"><div style="padding:12px;background:#111b21;border-radius:12px;margin-bottom:10px" onclick="document.getElementById('statusFile').click()">+ My Status - tap to add photo/video/audio</div><div id="statusContainer"></div></div></div>
+<div class="panel" id="p-calls"><div class="chatlist" id="callList" style="padding:20px;color:#8696a0">No calls yet - tap New Call</div><div style="padding:12px"><button onclick="alert('Video call ready! Camera will turn on')" style="width:100%;padding:14px;background:#25d366;border:none;border-radius:24px;font-weight:700">+ New Video/Voice Call</button></div></div>
+<div class="panel" id="p-communities"><div style="padding:40px;text-align:center;color:#8696a0"><div style="font-size:60px">👥</div><h3 style="color:#fff;margin:10px 0">Vibe Communities UNIQUE</h3><p>Music, Gaming, Love vibes</p><button onclick="let n=prompt('Community name?');if(n)document.getElementById('commList').innerHTML+=`<div style='padding:10px;background:#1f2c34;border-radius:10px;margin-top:8px'>👥 ${n}</div>`" style="margin-top:12px;padding:10px 18px;background:#25d366;border:none;border-radius:20px">+ New Community</button><div id="commList"></div></div></div>
 
 <div class="bottom-nav">
-<div class="nav active" onclick="switchTab('chats',this)"><div class="nav-icon">💬<span style="position:absolute;top:-6px;right:-6px;background:#25d366;color:#0b1014;font-size:10px;padding:1px 5px;border-radius:10px" id="unreadCount">1</span></div>Chats</div>
-<div class="nav" onclick="switchTab('updates',this)"><div class="nav-icon">⭕<span class="dot"></span></div>Updates</div>
-<div class="nav" onclick="switchTab('communities',this)"><div class="nav-icon">👥</div>Communities</div>
-<div class="nav" onclick="switchTab('calls',this)"><div class="nav-icon">📞</div>Calls</div>
+<div class="nav active" onclick="switchTab('chats',this)">💬 Chats</div>
+<div class="nav" onclick="switchTab('updates',this)">⭕ Updates</div>
+<div class="nav" onclick="switchTab('communities',this)">👥 Communities</div>
+<div class="nav" onclick="switchTab('calls',this)">📞 Calls</div>
 </div>
 
-<div class="fab" onclick="newChat()">+</div>
+<div class="fab" onclick="let n=prompt('Chat name?');if(n)addChat(n)">+</div>
 
 <div class="chat-screen" id="chatScreen">
-<div class="chat-header"><span onclick="closeChat()" style="font-size:22px;cursor:pointer">←</span><div class="avatar" id="chatAv">C</div><div style="flex:1"><b id="chatName">Cindy</b><br><small style="color:#8696a0" id="chatOnline">tap to vibe</small></div><span>📞</span><span style="margin-left:12px">🎥</span><span style="margin-left:12px">⋮</span></div>
+<div style="padding:10px;background:#1f2c34;display:flex;align-items:center;gap:10px"><span onclick="closeChat()" style="font-size:22px">←</span><div class="avatar" id="chatAv">C</div><div style="flex:1"><b id="chatName"></b><br><small style="color:#8696a0">Online - unique vibe</small></div></div>
 <div class="chat-area" id="chatArea"></div>
-<div class="input-bar">
-<span class="icon">😊</span>
-<input id="msgInput" placeholder="Message"><span class="icon" onclick="document.getElementById('fileInput').click()">📎</span><span class="icon" onclick="document.getElementById('fileInput').click()">📷</span>
-<span class="icon" id="voiceBtn" style="background:#25d366" onpointerdown="startRec()" onpointerup="stopRec()">🎤</span>
-</div>
+<div class="input-bar"><input id="msgInput" placeholder="Message"><button onclick="sendMsg()" style="padding:10px 16px;background:#25d366;border:none;border-radius:20px">➤</button></div>
 </div>
 
-<div class="call-screen" id="callScreen">
-<video id="localVideo" autoplay muted playsinline></video>
-<div style="position:absolute;bottom:30px;left:0;right:0;display:flex;justify-content:center;gap:16px">
-<button class="icon" style="background:#f15c6d;width:56px;height:56px" onclick="endCall()">✕</button>
-<button class="icon" style="width:56px;height:56px" onclick="toggleMute()">🎤</button>
-<button class="icon" style="width:56px;height:56px" onclick="toggleCam()">🎥</button>
-</div>
-<div style="position:absolute;top:20px;left:20px" id="callInfo">Calling...</div>
-</div>
-
-<div id="statusViewer" onclick="closeStatus()">
-<div class="progress" id="prog"></div>
-<div style="padding:10px;display:flex;align-items:center;gap:10px"><div class="avatar" id="viewerAv">E</div><div id="viewerName"></div><div style="margin-left:auto" onclick="closeStatus()">✕</div></div>
-<div id="viewerContent" style="flex:1;display:flex;align-items:center;justify-content:center"></div>
-</div>
-
-<input type="file" id="fileInput" accept="image/*,video/*" style="display:none" onchange="sendMedia(event)">
-<input type="file" id="statusFile" accept="image/*,video/*,audio/*" style="display:none" onchange="addStatusMedia(event)">
+<input type="file" id="statusFile" accept="image/*,video/*,audio/*" style="display:none" onchange="addStatus(event)">
 
 <script>
 let user=localStorage.getItem('ethan_user')||'';
-let messages=JSON.parse(localStorage.getItem('ethan_msgs_wa')||'{}');
-let statuses=JSON.parse(localStorage.getItem('ethan_status_wa')||'[]');
-let chats=[
- {name:'Cindy',msg:'First use the money I gave Queen',time:'Yesterday',avatar:'https://i.pravatar.cc/100?img=5',unread:0,story:true},
- {name:'Meta AI',msg:'Nice! 👍 Now do this final check: After...',time:'Yesterday',avatar:'',type:'ai',unread:0},
- {name:'WhatsApp',msg:'Make decisions fun with polls Creat...',time:'10/13/26',avatar:'wa',unread:1},
- {name:'Jude bro',msg:'😊',time:'10/12/26',tick:true,avatar:'https://i.pravatar.cc/100?img=8'},
- {name:'+256 777 825484',msg:'How are you',time:'10/12/26',tick:true,avatar:'https://i.pravatar.cc/100?img=12'},
- {name:'OKELLO AMBROSE',msg:'And how was your independence day',time:'10/11/26',avatar:'https://i.pravatar.cc/100?img=15'},
- {name:'MTNUganda-Zigi',msg:'Dear Customer, sorry about that. Pleas...',time:'10/10/26',avatar:'https://i.pravatar.cc/100?img=20'}
+let chats=JSON.parse(localStorage.getItem('ethan_chats')||'null')||[
+{name:'Cindy',msg:'First use the money I gave Queen',time:'Yesterday',unread:0},
+{name:'Meta AI',msg:'Nice! Now do this final check',time:'Yesterday'},
+{name:'WhatsApp',msg:'Make decisions fun with polls',time:'10/13/26',unread:1},
+{name:'Jude bro',msg:'😊',time:'10/12/26'},
+{name:'+256 777 825484',msg:'How are you',time:'10/12/26'},
+{name:'OKELLO AMBROSE',msg:'And how was your independence day',time:'10/11/26'},
+{name:'MTNUganda-Zigi',msg:'Dear Customer, sorry...',time:'10/10/26'}
 ];
-let currentChat=null,recorder,chunks=[],localStream;
-if(user){document.getElementById('login').style.display='none';}
-function doLogin(){let n=document.getElementById('userName').value.trim();if(!n)return alert('Enter name');user=n;localStorage.setItem('ethan_user',n);document.getElementById('login').style.display='none';renderChats();}
-renderChats();
-function renderChats(){let list=document.getElementById('chatList');list.innerHTML='';chats.forEach((c,i)=>{let av=c.avatar==='wa'?`<div class="avatar" style="background:#25d366;color:#fff">W</div>`:c.type==='ai'?`<div class="avatar" style="background:linear-gradient(135deg,#8b5cf6,#ec4899)">✨</div>`:c.avatar?`<div class="avatar ${c.story?'has-story':''}"><img src="${c.avatar}"></div>`:`<div class="avatar">${c.name[0]}</div>`;let tick=c.tick?`<span class="tick">✓✓</span>`:'';let badge=c.unread?`<span class="unread">${c.unread}</span>`:'';list.innerHTML+=`<div class="chat-row" onclick="openChat(${i})">${av}<div class="info"><div class="info-top"><div class="name">${c.name}</div><div class="time ${c.unread?'green':''}">${c.time}</div></div><div class="preview">${tick} ${c.msg} ${badge}</div></div></div>`;});}
-function filterChats(){let q=document.getElementById('searchInput').value.toLowerCase();let list=document.getElementById('chatList');list.innerHTML='';chats.filter(c=>c.name.toLowerCase().includes(q)||c.msg.toLowerCase().includes(q)).forEach((c,i)=>{let idx=chats.indexOf(c);let av=c.avatar==='wa'?`<div class="avatar" style="background:#25d366;color:#fff">W</div>`:c.avatar?`<div class="avatar"><img src="${c.avatar}"></div>`:`<div class="avatar">${c.name[0]}</div>`;list.innerHTML+=`<div class="chat-row" onclick="openChat(${idx})">${av}<div class="info"><div class="info-top"><div class="name">${c.name}</div><div class="time">${c.time}</div></div><div class="preview">${c.msg}</div></div></div>`;});}
-function filter(type,el){document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));el.classList.add('active');if(type==='all')renderChats();else if(type==='unread'){let f=chats.filter(c=>c.unread);let list=document.getElementById('chatList');list.innerHTML='';f.forEach(c=>{list.innerHTML+=`<div class="chat-row"><div class="avatar"><img src="${c.avatar}"></div><div class="info"><div class="info-top"><div class="name">${c.name}</div><div class="time green">${c.time}</div></div><div class="preview">${c.msg}<span class="unread">${c.unread}</span></div></div></div>`;});}}
-function switchTab(t,el){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.nav').forEach(n=>n.classList.remove('active'));document.getElementById('p-'+t).classList.add('active');el.classList.add('active');if(t!=='chats')document.querySelector('.fab').style.display='none';else document.querySelector('.fab').style.display='flex';}
-function openChat(i){currentChat=chats[i];document.getElementById('chatScreen').style.display='flex';document.getElementById('chatName').textContent=currentChat.name;document.getElementById('chatAv').textContent=currentChat.name[0];document.getElementById('chatOnline').textContent='Online - Ethan Vibes unique';loadMsgs();}
+let messages=JSON.parse(localStorage.getItem('ethan_msgs_wa2')||'{}');
+let statuses=JSON.parse(localStorage.getItem('ethan_status_wa2')||'[]');
+let currentChat=null;
 
+document.getElementById('loginBtn').addEventListener('click',doLogin);
+function doLogin(){
+ let n=document.getElementById('userName').value.trim();
+ if(!n){alert('Enter name');return;}
+ localStorage.setItem('ethan_user',n);
+ document.getElementById('login').style.display='none';
+ renderChats();
+}
+if(user){document.getElementById('login').style.display='none';renderChats();}
+
+function renderChats(){
+ let list=document.getElementById('chatList');list.innerHTML='';
+ chats.forEach((c,i)=>{
+   list.innerHTML+=`<div class="chat-row" onclick="openChat(${i})"><div class="avatar">${c.name[0]}</div><div class="info"><div style="display:flex;justify-content:space-between"><span class="name">${c.name}</span><span style="font-size:11px;color:#8696a0">${c.time}</span></div><div class="preview">${c.msg} ${c.unread?'<span style="background:#25d366;color:#000;padding:2px 6px;border-radius:10px;font-size:11px;margin-left:6px">'+c.unread+'</span>':''}</div></div></div>`;
+ });
+}
+function switchTab(t,el){
+ document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+ document.querySelectorAll('.nav').forEach(n=>n.classList.remove('active'));
+ document.getElementById('p-'+t).classList.add('active');
+ el.classList.add('active');
+}
+function openChat(i){
+ currentChat=chats[i];
+ document.getElementById('chatScreen').style.display='flex';
+ document.getElementById('chatName').textContent=currentChat.name;
+ document.getElementById('chatAv').textContent=currentChat.name[0];
+ loadMsgs();
+}
 function closeChat(){document.getElementById('chatScreen').style.display='none';}
-function loadMsgs(){let area=document.getElementById('chatArea');area.innerHTML='';let key=currentChat.name;let msgs=messages[key]||[{text:currentChat.msg,type:'bot',time:currentChat.time}];msgs.forEach(m=>renderBubble(m));}
-function renderBubble(m){let area=document.getElementById('chatArea');let d=document.createElement('div');d.className='bubble '+m.type;let content=m.text||'';if(m.mediaType==='image')content+=`<img src="${m.media}">`;if(m.mediaType==='video')content+=`<video src="${m.media}" controls></video>`;if(m.mediaType==='audio')content+=`<audio controls src="${m.media}" style="width:180px"></audio>`;content+=`<span class="bubble-time">${m.time||''} ${m.type==='user'?'✓✓':''}</span>`;d.innerHTML=content;area.appendChild(d);area.scrollTop=area.scrollHeight;}
-function sendMsg(){let input=document.getElementById('msgInput');let txt=input.value.trim();if(!txt||!currentChat)return;let time=new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});let m={text:txt,type:'user',time};if(!messages[currentChat.name])messages[currentChat.name]=[];messages[currentChat.name].push(m);localStorage.setItem('ethan_msgs_wa',JSON.stringify(messages));renderBubble(m);input.value='';setTimeout(()=>{let bot={text:"Got your vibe! 💜 "+txt,type:'bot',time};messages[currentChat.name].push(bot);localStorage.setItem('ethan_msgs_wa',JSON.stringify(messages));renderBubble(bot);},700);}
-
-function sendMedia(e){let file=e.target.files[0];if(!file||!currentChat)return;let reader=new FileReader();reader.onload=ev=>{let time=new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});let type=file.type.startsWith('video')?'video':'image';let m={text:'',media:ev.target.result,mediaType:type,type:'user',time};if(!messages[currentChat.name])messages[currentChat.name]=[];messages[currentChat.name].push(m);localStorage.setItem('ethan_msgs_wa',JSON.stringify(messages));renderBubble(m);};reader.readAsDataURL(file);}
-
-async function startRec(){try{let stream=await navigator.mediaDevices.getUserMedia({audio:true});recorder=new MediaRecorder(stream);chunks=[];recorder.ondataavailable=e=>chunks.push(e.data);recorder.onstop=()=>{let blob=new Blob(chunks,{type:'audio/webm'});let r=new FileReader();r.onload=()=>{let m={media:r.result,mediaType:'audio',type:'user',time:new Date().toLocaleTimeString()};if(!messages[currentChat.name])messages[currentChat.name]=[];messages[currentChat.name].push(m);localStorage.setItem('ethan_msgs_wa',JSON.stringify(messages));renderBubble(m);};r.readAsDataURL(blob);stream.getTracks().forEach(t=>t.stop());};recorder.start();document.getElementById('voiceBtn').style.background='#f15c6d';}catch{alert('Mic permission needed');}}
-function stopRec(){if(recorder&&recorder.state==='recording'){recorder.stop();document.getElementById('voiceBtn').style.background='#25d366';}}
-
-function addStatusMedia(e){let file=e.target.files[0];if(!file)return;let r=new FileReader();r.onload=ev=>{let s={media:ev.target.result,mediaType:file.type.startsWith('video')?'video':file.type.startsWith('audio')?'audio':'image',time:Date.now(),user};statuses.push(s);localStorage.setItem('ethan_status_wa',JSON.stringify(statuses));loadStatus();alert('Status added! Go to Updates tab');};r.readAsDataURL(file);}
-function loadStatus(){let c=document.getElementById('statusContainer');c.innerHTML='';statuses.slice().reverse().forEach((s,i)=>{let idx=statuses.length-1-i;let thumb=s.mediaType==='image'?`<img src="${s.media}">`:s.mediaType==='video'?'🎥':`🎵`;c.innerHTML+=`<div style="display:flex;align-items:center;gap:12px;padding:12px;background:#111b21;border-radius:12px;margin-bottom:8px;cursor:pointer" onclick="openStatus(${idx})"><div class="avatar has-story">${thumb.length<3?thumb:thumb.includes('img')?thumb:thumb}</div><div><b>${s.user}</b><br><small style="color:#8696a0">${new Date(s.time).toLocaleTimeString()} - ${s.mediaType} ${s.mediaType==='audio'?'🎵 Music Status':''}</small></div></div>`;});}
+function loadMsgs(){
+ let area=document.getElementById('chatArea');area.innerHTML='';
+ let key=currentChat.name;
+ let msgs=messages[key]||[{text:currentChat.msg,type:'bot'}];
+ msgs.forEach(m=>{
+   let d=document.createElement('div');
+   d.className='bubble '+(m.type==='user'?'user':'bot');
+   let media='';
+   if(m.mediaType==='image')media=`<br><img src="${m.media}" style="max-width:180px;border-radius:8px">`;
+   if(m.mediaType==='video')media=`<br><video src="${m.media}" controls style="max-width:180px;border-radius:8px"></video>`;
+   if(m.mediaType==='audio')media=`<br><audio controls src="${m.media}" style="width:160px"></audio>`;
+   d.innerHTML=m.text+media;
+   area.appendChild(d);
+ });
+ area.scrollTop=area.scrollHeight;
+}
+function sendMsg(){
+ let input=document.getElementById('msgInput');
+ let txt=input.value.trim();
+ if(!txt||!currentChat)return;
+ let m={text:txt,type:'user'};
+ if(!messages[currentChat.name])messages[currentChat.name]=[];
+ messages[currentChat.name].push(m);
+ localStorage.setItem('ethan_msgs_wa2',JSON.stringify(messages));
+ loadMsgs();
+ input.value='';
+ setTimeout(()=>{
+   let b={text:'Got it! 💜 '+txt,type:'bot'};
+   messages[currentChat.name].push(b);
+   localStorage.setItem('ethan_msgs_wa2',JSON.stringify(messages));
+   loadMsgs();
+ },600);
+}
+function addChat(n){
+ chats.unshift({name:n,msg:'New vibe chat started',time:'now'});
+ localStorage.setItem('ethan_chats',JSON.stringify(chats));
+ renderChats();
+}
+function addStatus(e){
+ let file=e.target.files[0];if(!file)return;
+ let r=new FileReader();
+ r.onload=ev=>{
+   statuses.push({media:ev.target.result,mediaType:file.type.split('/')[0],time:Date.now(),user:'Ethan',name:file.name});
+   localStorage.setItem('ethan_status_wa2',JSON.stringify(statuses));
+   alert('Status added! Check Updates tab');
+   loadStatus();
+ };
+ r.readAsDataURL(file);
+}
+function loadStatus(){
+ let c=document.getElementById('statusContainer');c.innerHTML='';
+ statuses.slice().reverse().forEach((s,i)=>{
+   c.innerHTML+=`<div style="padding:10px;background:#111b21;border-radius:10px;margin-bottom:8px">📷 ${s.mediaType} - ${new Date(s.time).toLocaleTimeString()} - ${s.name}</div>`;
+ });
+}
 loadStatus();
-function openStatus(idx){let s=statuses[idx];document.getElementById('statusViewer').style.display='flex';document.getElementById('viewerName').textContent=s.user+' - '+s.mediaType;let content=document.getElementById('viewerContent');if(s.mediaType==='image')content.innerHTML=`<img src="${s.media}" style="width:100%;hei
+document.getElementById('msgInput').addEventListener('keypress',e=>{if(e.key==='Enter')sendMsg();});
+</script>
+</body>
+                                                                   </html>
