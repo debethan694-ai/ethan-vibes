@@ -1,5 +1,5 @@
 name = "ethan-vibes"
-main = "src/index.js"
+main = "index.js"
 compatibility_date = "2026-10-28"
 
 # Configure the bindings in Cloudflare dashboard or uncomment/update IDs below.
