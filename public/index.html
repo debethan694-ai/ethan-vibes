@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#21113d">
+  <meta name="description" content="Discover music, movies and videos on Ethan Vibes.">
+  <title>Ethan Vibes — Music, Movies & Your Vibe</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="Ethan Vibes home">
+      <span class="brand-mark">EV<span>♫</span></span>
+      <span><strong>ETHAN VIBES</strong><small>MUSIC · MOVIES · YOUR VIBE</small></span>
+    </a>
+    <button id="adminToggle" class="outline-btn" type="button">CEO login</button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p class="eyebrow">WELCOME TO YOUR ENTERTAINMENT HUB</p>
+      <h1>Find your <span>next vibe.</span></h1>
+      <p class="hero-copy">Music to feel. Movies to remember. Your entertainment, all in one place.</p>
+      <label class="searchbox"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Search songs, movies, artists..." autocomplete="off"></label>
+      <nav class="filters" aria-label="Content categories">
+        <button class="chip active" data-filter="all">Everything</button>
+        <button class="chip" data-filter="music">♫ Music</button>
+        <button class="chip" data-filter="movie">🎬 Movies</button>
+        <button class="chip" data-filter="video">▶ Videos</button>
+      </nav>
+    </section>
+
+    <section class="section">
+      <div class="section-heading"><div><p class="eyebrow">FRESH DROPS</p><h2>Latest uploads</h2></div><span class="muted" id="resultCount">Loading…</span></div>
+      <div id="mediaGrid" class="media-grid"><div class="empty">Loading Ethan Vibes…</div></div>
+    </section>
+
+    <section id="adminPanel" class="admin-panel hidden">
+      <div class="section-heading"><div><p class="eyebrow">PRIVATE AREA</p><h2>CEO studio</h2></div><button id="logoutBtn" class="outline-btn hidden" type="button">Sign out</button></div>
+      <form id="loginForm" class="panel-card">
+        <h3>CEO sign in</h3>
+        <p class="muted">Only the authorized CEO account can upload and manage content.</p>
+        <label>Password<input id="ceoPassword" type="password" autocomplete="current-password" required minlength="8" placeholder="Enter your CEO password"></label>
+        <button class="primary-btn" type="submit">Sign in securely</button>
+        <p id="loginMessage" class="message" role="status"></p>
+      </form>
+      <form id="uploadForm" class="panel-card hidden">
+        <h3>Publish new content</h3>
+        <label>Title<input name="title" required maxlength="160" placeholder="Song or movie title"></label>
+        <label>Artist / creator (optional)<input name="artist" maxlength="120" placeholder="Artist or filmmaker"></label>
+        <label>Description (optional)<textarea name="description" maxlength="1000" rows="3" placeholder="Tell visitors about this upload"></textarea></label>
+        <div class="form-row">
+          <label>Type<select name="category"><option value="music">Music</option><option value="movie">Movie</option><option value="video">Video</option></select></label>
+          <label>Allow download<select name="allow_download"><option value="1">Yes, if licensed</option><option value="0">No, stream only</option></select></label>
+        </div>
+        <label>Media file<input name="file" type="file" accept="audio/*,video/*" required></label>
+        <p class="muted tiny">Large files are sent in 8 MiB parts. Keep this page open and your connection steady during the upload.</p>
+        <div class="progress-wrap"><div id="uploadProgress"></div></div><p id="uploadMessage" class="message" role="status"></p>
+        <button class="primary-btn" type="submit">Upload and publish</button>
+      </form>
+    </section>
+  </main>
+  <footer><span class="brand-mark small-mark">EV<span>♫</span></span><p>© <span id="year"></span> Ethan Vibes · Feel every moment.</p><p class="tiny">Only content authorized for distribution should be uploaded.</p></footer>
+  <script src="/app.js" defer></script>
+</body>
+  </html>
