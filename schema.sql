@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS media (
   content_type TEXT NOT NULL,
   object_key TEXT NOT NULL UNIQUE,
   file_size INTEGER NOT NULL,
-  allow_download INTEGER NOT NULL DEFAULT 1,
+  allow_download INTEGER NOT NULL DEFAULT 0,
   published INTEGER NOT NULL DEFAULT 0,
   created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
