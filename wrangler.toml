@@ -2,11 +2,10 @@ name = "ethan-vibes"
 main = "index.js"
 compatibility_date = "2026-10-28"
 
-# Configure the bindings in Cloudflare dashboard or uncomment/update IDs below.
-# [[d1_databases]]
-# binding = "DB"
-# database_name = "ethan-vibes-db"
-# database_id = "REPLACE_WITH_YOUR_D1_DATABASE_ID"
+[[d1_databases]]
+binding = "DB"
+database_name = "ethan-vibes-db"
+database_id = "ac7b62ee-2c2a-4912-a8c7-49ec4ae3f5b4"
 
 # [[r2_buckets]]
 # binding = "MEDIA"
