@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#21113d">
+  <meta name="description" content="Your saved favourites on Ethan Vibes.">
+  <title>Favorites — Ethan Vibes</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/">
+      <span class="brand-mark">EV<span>♫</span></span>
+      <span><strong>ETHAN VIBES</strong><small>MUSIC · MOVIES · YOUR VIBE</small></span>
+    </a>
+    <a class="outline-btn" href="/">Home</a>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p class="eyebrow">YOUR PERSONAL COLLECTION</p>
+      <h1>Your <span>favorites.</span></h1>
+      <p class="hero-copy">All the entertainment you've saved in one place.</p>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <div><p class="eyebrow">SAVED BY YOU</p><h2>My favorites</h2></div>
+        <span class="muted" id="resultCount">Loading…</span>
+      </div>
+      <div id="mediaGrid" class="media-grid">
+        <div class="empty">Loading your favorites…</div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span class="brand-mark small-mark">EV<span>♫</span></span>
+    <p>© <span id="year"></span> Ethan Vibes · Feel every moment.</p>
+  </footer>
+
+  <script src="/favorites.js" defer></script>
+</body>
+</html>
