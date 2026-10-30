@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#21113d">
+  <meta name="description" content="Ethan Vibes CEO Studio.">
+  <title>CEO Studio — Ethan Vibes</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/">
+      <span class="brand-mark">EV<span>♫</span></span>
+      <span><strong>ETHAN VIBES</strong><small>PRIVATE CEO STUDIO</small></span>
+    </a>
+    <a class="outline-btn" href="/">Back to Home</a>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p class="eyebrow">AUTHORIZED MANAGEMENT</p>
+      <h1>Welcome to <span>CEO Studio.</span></h1>
+      <p class="hero-copy">Sign in to manage and publish your entertainment content.</p>
+    </section>
+
+    <section id="adminPanel" class="admin-panel">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">PRIVATE AREA</p>
+          <h2>CEO management</h2>
+        </div>
+        <button id="logoutBtn" class="outline-btn hidden" type="button">Sign out</button>
+      </div>
+
+      <form id="loginForm" class="panel-card">
+        <h3>CEO sign in</h3>
+        <p class="muted">Only the authorized CEO can manage uploads.</p>
+        <label>Password
+          <input id="ceoPassword" type="password" autocomplete="current-password" required minlength="8" placeholder="Enter your CEO password">
+        </label>
+        <button class="primary-btn" type="submit">Sign in securely</button>
+        <p id="loginMessage" class="message" role="status"></p>
+      </form>
+
+      <form id="uploadForm" class="panel-card hidden">
+        <h3>Publish new content</h3>
+        <label>Title
+          <input name="title" required maxlength="160" placeholder="Song or movie title">
+        </label>
+        <label>Artist / creator (optional)
+          <input name="artist" maxlength="120" placeholder="Artist or filmmaker">
+        </label>
+        <label>Description (optional)
+          <textarea name="description" maxlength="1000" rows="3"></textarea>
+        </label>
+        <div class="form-row">
+          <label>Type
+            <select name="category">
+              <option value="music">Music</option>
+              <option value="movie">Movie</option>
+              <option value="video">Video</option>
+            </select>
+          </label>
+          <label>Allow download
+            <select name="allow_download">
+              <option value="1">Yes, if licensed</option>
+              <option value="0">No, stream only</option>
+            </select>
+          </label>
+        </div>
+        <label>Media file
+          <input name="file" type="file" accept="audio/*,video/*" required>
+        </label>
+        <p class="muted tiny">Upload requires a working media storage connection.</p>
+        <div class="progress-wrap"><div id="uploadProgress"></div></div>
+        <p id="uploadMessage" class="message" role="status"></p>
+        <button class="primary-btn" type="submit">Upload and publish</button>
+      </form>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <div><p class="eyebrow">CONTENT LIBRARY</p><h2>Published content</h2></div>
+        <span class="muted" id="resultCount">Loading…</span>
+      </div>
+      <label class="searchbox">
+        <span aria-hidden="true">⌕</span>
+        <input id="search" type="search" placeholder="Search content..." autocomplete="off">
+      </label>
+      <div id="mediaGrid" class="media-grid"></div>
+    </section>
+  </main>
+
+  <footer>
+    <span class="brand-mark small-mark">EV<span>♫</span></span>
+    <p>© <span id="year"></span> Ethan Vibes · CEO Studio.</p>
+  </footer>
+
+  <button id="adminToggle" class="hidden" type="button">CEO Studio</button>
+  <script src="/app.js" defer></script>
+</body>
+  </html>
