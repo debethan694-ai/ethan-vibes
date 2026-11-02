@@ -296,7 +296,6 @@ async function handle(request, env) {
     let uploadId;
 
     try {
-      // Keep client creation inside this try block so its errors are logged too.
       client = storage(env);
 
       const result = await client.send(
@@ -324,8 +323,8 @@ async function handle(request, env) {
       ).run();
 
       return json({ id }, 201);
+
     } catch (error) {
-      // Log diagnostic details in Cloudflare Observability. Never log credentials.
       console.error("UPLOAD_INIT_FAILED", {
         name: error?.name || "Error",
         message: error?.message || String(error),
@@ -351,7 +350,14 @@ async function handle(request, env) {
       }
 
       return json({
-        error: "Could not initialize upload. Check Cloudflare logs for UPLOAD_INIT_FAILED."
+        error: "UPLOAD_INIT_FAILED",
+        details: {
+          name: error?.name || "Error",
+          message: error?.message || String(error),
+          code: error?.Code || error?.code || "",
+          statusCode: error?.$metadata?.httpStatusCode || "",
+          requestId: error?.$metadata?.requestId || ""
+        }
       }, 500);
     }
   }
@@ -407,6 +413,7 @@ async function handle(request, env) {
         partNumber,
         etag: result.ETag
       });
+
     } catch (error) {
       console.error("UPLOAD_PART_FAILED", {
         name: error?.name || "Error",
@@ -495,6 +502,7 @@ async function handle(request, env) {
       ]);
 
       return json({ ok: true, id }, 201);
+
     } catch (error) {
       console.error("UPLOAD_COMPLETE_FAILED", {
         name: error?.name || "Error",
